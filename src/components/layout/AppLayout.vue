@@ -18,7 +18,7 @@
     </aside>
     <main class="flex-1 flex flex-col">
       <header class="bg-white border-b p-3 flex items-center justify-between">
-        <div class="text-sm font-medium">{{ currentName }}</div>
+        <div class="text-sm font-medium">{{ currentName }} <span v-if="pendingCount>0" class="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-red-100 text-red-700">待处理 {{ pendingCount }}</span></div>
         <div class="text-xs text-gray-500">{{ now }}</div>
       </header>
       <div class="p-4 flex-1 overflow-auto">
@@ -29,9 +29,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import dayjs from 'dayjs'
+import { loadData } from '../../data/loader'
 
 const route = useRoute()
 const routes = [
@@ -44,4 +45,12 @@ const routes = [
 const currentName = computed(() => routes.find(r=>route.path.startsWith(r.path))?.name || '')
 const now = ref(dayjs().format('YYYY-MM-DD HH:mm:ss'))
 setInterval(()=>{ now.value = dayjs().format('YYYY-MM-DD HH:mm:ss') }, 1000)
+
+const pendingCount = ref(0)
+onMounted(async () => {
+  try {
+    const d = await loadData()
+    pendingCount.value = (d.tickets || []).filter(t => t.status === '待处理' || t.status === '待回归').length
+  } catch {}
+})
 </script>
