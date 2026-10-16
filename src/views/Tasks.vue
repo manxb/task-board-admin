@@ -46,7 +46,7 @@
             <td class="p-2 max-w-[240px] truncate" :title="t.name">{{ t.name }}</td>
             <td class="p-2">{{ t.site }}</td>
             <td class="p-2">{{ t.type }}</td>
-            <td class="p-2">{{ t.status }}</td>
+            <td class="p-2"><span :class="statusClass(t.status)">{{ t.status }}</span></td>
             <td class="p-2">{{ t.completion }}%</td>
             <td class="p-2">{{ ringOwner(t, 'product') }} ({{ t.rings.product.progress }})</td>
             <td class="p-2">{{ ringOwner(t, 'design') }} ({{ t.rings.design.progress }})</td>
@@ -87,6 +87,14 @@ const { data, tasksWithMeta, accountMap, fetchData } = useData()
 onMounted(fetchData)
 
 const filters = reactive({ site: '', status: '', assignee: '', role: '', keyword: '' })
+
+const statusClass = (s: string) => {
+  if (s === '已上线') return 'text-green-700 bg-green-100 px-2 py-0.5 rounded text-xs'
+  if (s === '测试中') return 'text-orange-700 bg-orange-100 px-2 py-0.5 rounded text-xs'
+  if (s === '开发中') return 'text-blue-700 bg-blue-100 px-2 py-0.5 rounded text-xs'
+  if (s === '设计中') return 'text-purple-700 bg-purple-100 px-2 py-0.5 rounded text-xs'
+  return 'text-gray-700 bg-gray-100 px-2 py-0.5 rounded text-xs'
+}
 
 const ringOwner = (t: Task, ring: keyof Task['rings']) => {
   const uid = t.rings[ring].userId
