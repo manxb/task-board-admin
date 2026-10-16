@@ -50,7 +50,7 @@ const pendingCount = ref(0)
 onMounted(async () => {
   try {
     const d = await loadData()
-    pendingCount.value = (d.tickets || []).filter(t => t.status === '待处理' || t.status === '待回归').length
+    pendingCount.value = (d.tickets || []).filter(t => t.status === '待处理').length
   } catch {}
 })
 
