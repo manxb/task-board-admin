@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, onMounted, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import dayjs from 'dayjs'
 import { loadData } from '../../data/loader'
@@ -52,5 +52,13 @@ onMounted(async () => {
     const d = await loadData()
     pendingCount.value = (d.tickets || []).filter(t => t.status === '待处理' || t.status === '待回归').length
   } catch {}
+})
+
+watchEffect(() => {
+  if (pendingCount.value > 0) {
+    document.title = `【待处理 ${pendingCount.value}】任务看板`
+  } else {
+    document.title = '任务看板'
+  }
 })
 </script>
