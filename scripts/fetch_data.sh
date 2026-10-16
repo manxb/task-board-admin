@@ -1,12 +1,18 @@
 #!/bin/bash
-# 使用方法：export COOKIE="..." 或直接在此填入登录后的 Cookie
+# 使用方法：将 Cookie 写入 scripts/.cookie 文件（第一行即可）或设置 COOKIE 环境变量
 set -e
 DIR="$(cd "$(dirname "$0")/.." && pwd)"
+COOKIE_FILE="$DIR/scripts/.cookie"
 COOKIE="${COOKIE:-}"
+
+if [ -z "$COOKIE" ] && [ -f "$COOKIE_FILE" ]; then
+  COOKIE=$(head -n 1 "$COOKIE_FILE" | sed 's/[[:space:]]*$//')
+fi
+
 URL="https://rd-task-board.workspace-663903.chatgpt.site/api/bootstrap"
 
 if [ -z "$COOKIE" ]; then
-  echo "请设置 COOKIE 环境变量（从浏览器 DevTools 复制）"
+  echo "请设置 COOKIE 环境变量或将 Cookie 写入 scripts/.cookie"
   exit 1
 fi
 
