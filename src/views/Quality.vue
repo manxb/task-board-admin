@@ -1,0 +1,86 @@
+<template>
+  <div class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-white rounded border p-4">
+        <div class="text-sm text-gray-500">待回归</div>
+        <div class="text-2xl font-semibold">{{ pendingRegression.length }}</div>
+      </div>
+      <div class="bg-white rounded border p-4">
+        <div class="text-sm text-gray-500">待处理</div>
+        <div class="text-2xl font-semibold">{{ pendingHandle.length }}</div>
+      </div>
+      <div class="bg-white rounded border p-4">
+        <div class="text-sm text-gray-500">已关闭</div>
+        <div class="text-2xl font-semibold">{{ closedTickets.length }}</div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded border overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="text-left p-2">#</th>
+            <th class="text-left p-2">标题</th>
+            <th class="text-left p-2">状态</th>
+            <th class="text-left p-2">优先级</th>
+            <th class="text-left p-2">站点</th>
+            <th class="text-left p-2">处理人</th>
+            <th class="text-left p-2">报单人</th>
+            <th class="text-left p-2">创建时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="tk in regressionList" :key="tk.id" class="border-t hover:bg-gray-50">
+            <td class="p-2">{{ tk.number }}</td>
+            <td class="p-2 max-w-[320px] truncate" :title="tk.title">{{ tk.title }}</td>
+            <td class="p-2">{{ tk.status }}</td>
+            <td class="p-2">{{ tk.priority }}</td>
+            <td class="p-2">{{ tk.site }}</td>
+            <td class="p-2">{{ tk.assignee || '-' }}</td>
+            <td class="p-2">{{ tk.reporter || tk.submittedByName || '-' }}</td>
+            <td class="p-2">{{ formatTime(tk.createdAt) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bg-white rounded-lg border p-4">
+      <h2 class="text-lg font-medium mb-3">待回归按处理人分布</h2>
+      <v-chart :option="regByAssignee" autoresize class="w-full h-[320px]" />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed, onMounted } from 'vue'
+import { use } from 'echarts/core'
+import { CanvasRenderer } from 'echarts/renderers'
+import { BarChart, PieChart } from 'echarts/charts'
+import { TitleComponent, TooltipComponent, LegendComponent, GridComponent } from 'echarts/components'
+import VChart from 'vue-echarts'
+import dayjs from 'dayjs'
+import { useData } from '../composables/useData'
+import { countBy } from '../utils'
+
+use([CanvasRenderer, BarChart, PieChart, TitleComponent, TooltipComponent, LegendComponent, GridComponent])
+
+const { data, closedTickets, fetchData } = useData()
+onMounted(fetchData)
+
+const pendingRegression = computed(() => data.value?.tickets.filter(t=>t.status==='待回归')||[])
+const pendingHandle = computed(() => data.value?.tickets.filter(t=>t.status==='待处理')||[])
+const regressionList = computed(() => [...pendingRegression.value, ...pendingHandle.value].sort((a,b)=>(a.number||0)-(b.number||0)))
+
+const formatTime = (ts:number) => dayjs(ts).format('YYYY-MM-DD HH:mm')
+
+const regByAssignee = computed(() => {
+  const c = countBy(pendingRegression.value, t=>t.assignee||'-')
+  const entries = Object.entries(c).sort((a,b)=>b[1]-a[1])
+  return {
+    tooltip:{ trigger:'axis' },
+    xAxis:{ type:'category', data: entries.map(e=>e[0]), axisLabel:{ rotate:30 } },
+    yAxis:{ type:'value' },
+    series:[{ type:'bar', data: entries.map(e=>e[1]), itemStyle:{ color:'#f59e0b' } }]
+  }
+})
+</script>
