@@ -15,6 +15,7 @@
         <option value="待回归">待回归</option>
         <option value="待处理">待处理</option>
         <option value="已关闭">已关闭</option>
+        <option value="处理中">处理中</option>
       </select>
       <select v-model="filters.assignee" class="border rounded px-2 py-1 text-sm">
         <option value="">全部处理人</option>
@@ -43,7 +44,7 @@
           <tr v-for="tk in filteredTickets" :key="tk.id" class="border-t hover:bg-gray-50">
             <td class="p-2">{{ tk.number }}</td>
             <td class="p-2 max-w-[320px] truncate" :title="tk.title">{{ tk.title }}</td>
-            <td class="p-2">{{ tk.status }}</td>
+            <td class="p-2"><span :class="ticketStatusClass(tk.status)">{{ tk.status }}</span></td>
             <td class="p-2">{{ tk.priority }}</td>
             <td class="p-2">{{ tk.site }}</td>
             <td class="p-2">{{ tk.assignee || '-' }}</td>
@@ -73,7 +74,7 @@
             <td class="p-2 max-w-[240px] truncate">{{ t.name }}</td>
             <td class="p-2">{{ t.site }}</td>
             <td class="p-2">{{ t.type }}</td>
-            <td class="p-2">{{ t.status }}</td>
+            <td class="p-2"><span :class="taskStatusClass(t.status)">{{ t.status }}</span></td>
             <td class="p-2">{{ t.live ? '是' : '否' }}</td>
             <td class="p-2">{{ t.activityStart || '-' }}</td>
           </tr>
@@ -93,6 +94,22 @@ const { data, tasksWithMeta, fetchData } = useData()
 onMounted(fetchData)
 
 const filters = reactive({ site:'', status:'', assignee:'', keyword:'' })
+
+const ticketStatusClass = (s: string) => {
+  if (s === '已关闭') return 'text-green-700 bg-green-100 px-2 py-0.5 rounded text-xs'
+  if (s === '待回归') return 'text-orange-700 bg-orange-100 px-2 py-0.5 rounded text-xs'
+  if (s === '待处理') return 'text-red-700 bg-red-100 px-2 py-0.5 rounded text-xs'
+  if (s === '处理中') return 'text-blue-700 bg-blue-100 px-2 py-0.5 rounded text-xs'
+  return 'text-gray-700 bg-gray-100 px-2 py-0.5 rounded text-xs'
+}
+
+const taskStatusClass = (s: string) => {
+  if (s === '已上线') return 'text-green-700 bg-green-100 px-2 py-0.5 rounded text-xs'
+  if (s === '测试中') return 'text-orange-700 bg-orange-100 px-2 py-0.5 rounded text-xs'
+  if (s === '开发中') return 'text-blue-700 bg-blue-100 px-2 py-0.5 rounded text-xs'
+  if (s === '设计中') return 'text-purple-700 bg-purple-100 px-2 py-0.5 rounded text-xs'
+  return 'text-gray-700 bg-gray-100 px-2 py-0.5 rounded text-xs'
+}
 
 const formatTime = (ts:number) => dayjs(ts).format('YYYY-MM-DD HH:mm')
 

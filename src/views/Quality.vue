@@ -33,7 +33,7 @@
           <tr v-for="tk in regressionList" :key="tk.id" class="border-t hover:bg-gray-50">
             <td class="p-2">{{ tk.number }}</td>
             <td class="p-2 max-w-[320px] truncate" :title="tk.title">{{ tk.title }}</td>
-            <td class="p-2">{{ tk.status }}</td>
+            <td class="p-2"><span :class="ticketStatusClass(tk.status)">{{ tk.status }}</span></td>
             <td class="p-2">{{ tk.priority }}</td>
             <td class="p-2">{{ tk.site }}</td>
             <td class="p-2">{{ tk.assignee || '-' }}</td>
@@ -66,6 +66,14 @@ use([CanvasRenderer, BarChart, PieChart, TitleComponent, TooltipComponent, Legen
 
 const { data, closedTickets, fetchData } = useData()
 onMounted(fetchData)
+
+const ticketStatusClass = (s: string) => {
+  if (s === '已关闭') return 'text-green-700 bg-green-100 px-2 py-0.5 rounded text-xs'
+  if (s === '待回归') return 'text-orange-700 bg-orange-100 px-2 py-0.5 rounded text-xs'
+  if (s === '待处理') return 'text-red-700 bg-red-100 px-2 py-0.5 rounded text-xs'
+  if (s === '处理中') return 'text-blue-700 bg-blue-100 px-2 py-0.5 rounded text-xs'
+  return 'text-gray-700 bg-gray-100 px-2 py-0.5 rounded text-xs'
+}
 
 const pendingRegression = computed(() => data.value?.tickets.filter(t=>t.status==='待回归')||[])
 const pendingHandle = computed(() => data.value?.tickets.filter(t=>t.status==='待处理')||[])
