@@ -1,0 +1,6 @@
+# 每5分钟同步一次接口数据
+# 编辑 crontab：crontab -e
+# PATH 根据实际环境调整（which bash/python3/curl）
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+*/5 * * * * cd /home/wwwroot/task-board-admin && bash scripts/fetch_data.sh >> /tmp/taskboard-sync.log 2>&1
