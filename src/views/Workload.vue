@@ -30,7 +30,9 @@ import { countBy } from '../utils'
 use([CanvasRenderer, BarChart, TitleComponent, TooltipComponent, LegendComponent, GridComponent])
 
 const { data, accountMap, fetchData } = useData()
-onMounted(fetchData)
+onMounted(async () => {
+  await fetchData()
+})
 
 const ticketsByAssignee = computed(() => {
   const tickets = data.value?.tickets || []
