@@ -28,35 +28,37 @@ onMounted(fetchData)
 
 const ticketsByAssignee = computed(() => {
   const tickets = data.value?.tickets || []
-  const c = countBy(tickets, t => t.assignee || '-')
-  const entries = Object.entries(c).filter(e => e[0] !== '-').sort((a,b)=>b[1]-a[1])
+  const c = countBy(tickets, t => (t.assignee && t.assignee.trim()) || '未分配')
+  const entries = Object.entries(c).sort((a,b)=>b[1]-a[1])
   return {
     tooltip: { trigger: 'axis' as const },
-    xAxis: { type: 'category' as const, data: entries.map(e=>e[0]), axisLabel:{ rotate:30 } },
+    xAxis: { type: 'category' as const, data: entries.map(e=>e[0]), axisLabel:{ rotate:30, interval:0 } },
     yAxis: { type: 'value' as const, minInterval: 1 },
-    series: [{ type: 'bar' as const, data: entries.map(e=>e[1]), itemStyle:{ color:'#8b5cf6' } }]
+    series: [{ type: 'bar' as const, data: entries.map(e=>e[1]), itemStyle:{ color:'#8b5cf6' }, barMaxWidth:40 }]
   }
 })
 
 const roleOwner = computed(() => {
   const pairs: Array<[string,string]> = []
   const tasks = data.value?.tasks || []
+  const amap = accountMap.value
   for (const t of tasks) {
+    const rings = t.rings as any
     for (const r of ['product','design','frontend','backend','qa'] as const) {
-      const uid = t.rings[r].userId
-      if (uid) {
-        const a = accountMap.value.get(uid)
-        if (a) pairs.push([a.role, a.name])
+      const uid = rings[r]?.userId
+      if (uid && amap.has(uid)) {
+        const a = amap.get(uid)!
+        pairs.push([a.role || '-', a.name || uid])
       }
     }
   }
   const c = countBy(pairs, p => `${p[0]}·${p[1]}`)
-  const entries = Object.entries(c)
+  const entries = Object.entries(c).sort((a,b)=>b[1]-a[1])
   return {
     tooltip: { trigger: 'axis' as const },
-    xAxis: { type: 'category' as const, data: entries.map(e=>e[0].split('·')[1]), axisLabel:{ rotate:30 } },
+    xAxis: { type: 'category' as const, data: entries.map(e=>e[0].split('·')[1]), axisLabel:{ rotate:30, interval:0 } },
     yAxis: { type: 'value' as const, minInterval: 1 },
-    series: [{ type: 'bar' as const, data: entries.map(e=>e[1]), itemStyle:{ color:'#06b6d4' } }]
+    series: [{ type: 'bar' as const, data: entries.map(e=>e[1]), itemStyle:{ color:'#06b6d4' }, barMaxWidth:40 }]
   }
 })
 </script>
