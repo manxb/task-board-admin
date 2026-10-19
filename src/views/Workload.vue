@@ -2,13 +2,17 @@
   <div class="space-y-6">
     <div class="bg-white rounded-lg border p-4">
       <h2 class="text-lg font-medium mb-3">按处理人统计工单（总数）</h2>
-      <v-chart v-if="hasTicketData" :option="ticketsByAssignee" autoresize class="w-full h-[340px]" />
-      <div v-else class="text-sm text-gray-500 py-12 text-center">暂无数据</div>
+      <div class="w-full h-[340px]">
+        <v-chart v-if="hasTicketData" :option="ticketsByAssignee" autoresize class="w-full h-full" />
+        <div v-else class="text-sm text-gray-500 py-12 text-center">暂无数据</div>
+      </div>
     </div>
     <div class="bg-white rounded-lg border p-4">
       <h2 class="text-lg font-medium mb-3">按角色环节分配（负责人）</h2>
-      <v-chart v-if="hasRoleData" :option="roleOwner" autoresize class="w-full h-[340px]" />
-      <div v-else class="text-sm text-gray-500 py-12 text-center">暂无数据</div>
+      <div class="w-full h-[340px]">
+        <v-chart v-if="hasRoleData" :option="roleOwner" autoresize class="w-full h-full" />
+        <div v-else class="text-sm text-gray-500 py-12 text-center">暂无数据</div>
+      </div>
     </div>
   </div>
 </template>
@@ -36,6 +40,7 @@ const ticketsByAssignee = computed(() => {
   const values = entries.map(e => e[1])
   return {
     tooltip: { trigger: 'axis' as const },
+    grid: { left: 30, right: 20, bottom: 40, top: 20, containLabel: true },
     xAxis: { type: 'category' as const, data: names, axisLabel:{ rotate:30, interval:0 } },
     yAxis: { type: 'value' as const, minInterval: 1 },
     series: [{ type: 'bar' as const, data: values, itemStyle:{ color:'#8b5cf6' }, barMaxWidth:40 }]
@@ -65,6 +70,7 @@ const roleOwner = computed(() => {
   const values = entries.map(e => e[1])
   return {
     tooltip: { trigger: 'axis' as const },
+    grid: { left: 30, right: 20, bottom: 40, top: 20, containLabel: true },
     xAxis: { type: 'category' as const, data: names, axisLabel:{ rotate:30, interval:0 } },
     yAxis: { type: 'value' as const, minInterval: 1 },
     series: [{ type: 'bar' as const, data: values, itemStyle:{ color:'#06b6d4' }, barMaxWidth:40 }]
