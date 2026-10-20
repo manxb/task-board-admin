@@ -56,7 +56,7 @@
           <div class="text-xs text-gray-500 mb-2">{{ t.site }} · {{ t.status }}</div>
           <div class="flex items-center gap-2">
             <div class="h-2 bg-gray-200 flex-1 rounded">
-              <div class="h-2 bg-green-500 rounded" :style="{ width: t.completion + '%' }"></div>
+              <div :class="t.completion >= 100 ? 'h-2 bg-green-500 rounded' : 'h-2 bg-blue-500 rounded'" :style="{ width: Math.min(t.completion,100) + '%' }"></div>
             </div>
             <div class="text-xs w-10 text-right">{{ t.completion }}%</div>
           </div>
