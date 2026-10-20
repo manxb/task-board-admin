@@ -80,7 +80,7 @@ const ticketStatusClass = (s: string) => {
 
 const pendingRegression = computed(() => data.value?.tickets.filter(t=>t.status==='待回归')||[])
 const pendingHandle = computed(() => data.value?.tickets.filter(t=>t.status==='待处理')||[])
-const regressionList = computed(() => [...pendingRegression.value, ...pendingHandle.value].sort((a,b)=>(a.number||0)-(b.number||0)))
+const regressionList = computed(() => pendingRegression.value.sort((a,b)=>(a.number||0)-(b.number||0)))
 
 const formatTime = (ts:number) => dayjs(ts).format('YYYY-MM-DD HH:mm')
 
