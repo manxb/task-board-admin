@@ -65,7 +65,9 @@
 
     <div class="bg-white rounded-lg border p-4">
       <h2 class="text-lg font-medium mb-3">各任务环节堆叠（完成度拆解）</h2>
-      <v-chart :option="stackedOption" autoresize class="w-full h-[380px]" />
+      <div class="w-full h-[380px]">
+        <v-chart :option="stackedOption" autoresize class="w-full h-full" />
+      </div>
     </div>
   </div>
 </template>
@@ -146,17 +148,20 @@ const filteredTasks = computed(() => {
 })
 
 const stackedOption = computed(() => {
-  const names = filteredTasks.value.map(t => t.name.length>12 ? t.name.slice(0,12)+'…' : t.name)
+  const list = filteredTasks.value
+  const names = list.map(t => t.name.length>12 ? t.name.slice(0,12)+'…' : t.name)
   return {
-    tooltip: { trigger: 'axis', axisPointer:{ type:'shadow' } },
+    tooltip: { trigger: 'axis' as const, axisPointer:{ type:'shadow' } },
     legend: { data: ['完成度'] },
-    xAxis: { type: 'category', data: names, axisLabel:{ rotate:30 } },
-    yAxis: { type: 'value', max: 100 },
+    grid: { left: 30, right: 20, bottom: 40, top: 20, containLabel: true },
+    xAxis: { type: 'category' as const, data: names, axisLabel:{ rotate:30, interval:0 } },
+    yAxis: { type: 'value' as const, max: 100, minInterval: 10 },
     series: [{
       name: '完成度',
-      type: 'bar',
-      data: filteredTasks.value.map(t => t.completion),
-      itemStyle:{ color: '#3b82f6' }
+      type: 'bar' as const,
+      data: list.map(t => t.completion),
+      itemStyle:{ color: '#3b82f6' },
+      barMaxWidth: 40
     }]
   }
 })
