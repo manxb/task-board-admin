@@ -38,11 +38,11 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
       <div class="bg-white rounded-lg border p-4">
         <h2 class="text-lg font-medium mb-3">任务状态分布</h2>
-        <v-chart :option="statusPie" :autoresize="false" class="w-full h-[320px]" />
+        <v-chart :option="statusPie" :autoresize="false" class="w-full h-[260px]" />
       </div>
       <div class="bg-white rounded-lg border p-4">
         <h2 class="text-lg font-medium mb-3">按站点/类型统计</h2>
-        <div class="w-full h-[320px] overflow-hidden">
+        <div class="w-full h-[260px] overflow-hidden">
           <v-chart :option="siteTypeBar" :autoresize="false" class="w-full h-full" />
         </div>
       </div>
@@ -103,7 +103,7 @@ const statusPie = computed(() => {
     animation: false,
     series: [{
       type: 'pie' as const,
-      radius: '60%',
+      radius: '55%',
       center: ['50%', '50%'],
       data: entries.map(([name, value]) => ({ name, value })),
       silent: true
