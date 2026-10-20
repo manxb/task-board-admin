@@ -150,6 +150,7 @@ const filteredTasks = computed(() => {
 const stackedOption = computed(() => {
   const list = filteredTasks.value
   const names = list.map(t => t.name.length>12 ? t.name.slice(0,12)+'…' : t.name)
+  const values = list.map(t => t.completion)
   return {
     tooltip: { trigger: 'axis' as const, axisPointer:{ type:'shadow' } },
     legend: { data: ['完成度'] },
@@ -159,8 +160,10 @@ const stackedOption = computed(() => {
     series: [{
       name: '完成度',
       type: 'bar' as const,
-      data: list.map(t => t.completion),
-      itemStyle:{ color: '#3b82f6' },
+      data: values,
+      itemStyle: {
+        color: (params: any) => params.value >= 100 ? '#22c55e' : '#3b82f6'
+      },
       barMaxWidth: 40
     }]
   }
