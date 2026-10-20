@@ -126,6 +126,13 @@ const taskMap = computed(() => {
 
 const taskName = (id:string) => taskMap.value.get(id) || id
 
+const statusOrder: Record<string, number> = {
+  '待处理': 1,
+  '处理中': 2,
+  '待回归': 3,
+  '已关闭': 4
+}
+
 const filteredTickets = computed(() => {
   return (data.value?.tickets||[]).filter(tk => {
     if (filters.site && tk.site !== filters.site) return false
@@ -136,7 +143,12 @@ const filteredTickets = computed(() => {
       if (!(tk.title||'').includes(kw) && !(taskName(tk.taskId)||'').includes(kw)) return false
     }
     return true
-  }).sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0))
+  }).sort((a,b) => {
+    const sa = statusOrder[a.status] || 99
+    const sb = statusOrder[b.status] || 99
+    if (sa !== sb) return sa - sb
+    return (b.updatedAt||0) - (a.updatedAt||0)
+  })
 })
 
 function exportCsv() {
