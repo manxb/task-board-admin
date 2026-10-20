@@ -46,7 +46,10 @@
 
     <div class="bg-white rounded-lg border p-4">
       <h2 class="text-lg font-medium mb-3">待回归按处理人分布</h2>
-      <v-chart :option="regByAssignee" autoresize class="w-full h-[320px]" />
+      <div class="w-full h-[320px]">
+        <v-chart v-if="hasRegData" :option="regByAssignee" autoresize class="w-full h-full" />
+        <div v-else class="text-sm text-gray-500 py-12 text-center">暂无数据</div>
+      </div>
     </div>
   </div>
 </template>
@@ -82,13 +85,18 @@ const regressionList = computed(() => [...pendingRegression.value, ...pendingHan
 const formatTime = (ts:number) => dayjs(ts).format('YYYY-MM-DD HH:mm')
 
 const regByAssignee = computed(() => {
-  const c = countBy(pendingRegression.value, t=>t.assignee||'-')
-  const entries = Object.entries(c).sort((a,b)=>b[1]-a[1])
+  const c = countBy(pendingRegression.value, t=> (t.assignee && String(t.assignee).trim()) || '未分配')
+  const entries = Object.entries(c).filter(e=>e[0]!=='未分配').sort((a,b)=>b[1]-a[1])
+  const names = entries.map(e=>e[0])
+  const values = entries.map(e=>e[1])
   return {
-    tooltip:{ trigger:'axis' },
-    xAxis:{ type:'category', data: entries.map(e=>e[0]), axisLabel:{ rotate:30 } },
-    yAxis:{ type:'value' },
-    series:[{ type:'bar', data: entries.map(e=>e[1]), itemStyle:{ color:'#f59e0b' } }]
+    tooltip:{ trigger:'axis' as const },
+    grid:{ left:30, right:20, bottom:40, top:20, containLabel:true },
+    xAxis:{ type:'category' as const, data: names, axisLabel:{ rotate:30, interval:0 } },
+    yAxis:{ type:'value' as const, minInterval:1 },
+    series:[{ type:'bar' as const, data: values, itemStyle:{ color:'#f59e0b' }, barMaxWidth:40 }]
   }
 })
+
+const hasRegData = computed(() => (regByAssignee.value.xAxis.data as any[]).length > 0)
 </script>
