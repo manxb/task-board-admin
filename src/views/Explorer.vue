@@ -43,7 +43,10 @@
         <tbody>
           <tr v-for="tk in filteredTickets" :key="tk.id" class="border-t hover:bg-gray-50">
             <td class="p-2">{{ tk.number }}</td>
-            <td class="p-2 max-w-[320px] truncate" :title="tk.title">{{ tk.title }}</td>
+            <td class="p-2 max-w-[320px]">
+              <button v-if="hasAttachments(tk)" class="text-blue-600 hover:underline text-left truncate max-w-[320px]" @click="openGallery(tk)" :title="tk.title">{{ tk.title }}</button>
+              <span v-else class="truncate max-w-[320px] inline-block" :title="tk.title">{{ tk.title }}</span>
+            </td>
             <td class="p-2"><span :class="ticketStatusClass(tk.status)">{{ tk.status }}</span></td>
             <td class="p-2">{{ tk.priority }}</td>
             <td class="p-2">{{ tk.site }}</td>
@@ -81,12 +84,16 @@
         </tbody>
       </table>
     </div>
+
+    <div id="pswp-gallery" class="pswp-gallery" style="display:none"></div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, reactive } from 'vue'
 import dayjs from 'dayjs'
+import PhotoSwipeLightbox from 'photoswipe/lightbox'
+import 'photoswipe/style.css'
 import { useData } from '../composables/useData'
 import { countBy } from '../utils'
 
@@ -131,6 +138,28 @@ const statusOrder: Record<string, number> = {
   '处理中': 2,
   '待回归': 3,
   '已关闭': 4
+}
+
+const hasAttachments = (tk: any) => Array.isArray(tk.attachments) && tk.attachments.length > 0
+
+const openGallery = (tk: any) => {
+  const items = (tk.attachments || []).map((a: any) => ({
+    src: a.url,
+    w: 1600,
+    h: 1200,
+    alt: a.name
+  }))
+  const gallery = document.getElementById('pswp-gallery')
+  if (!gallery) return
+  gallery.innerHTML = items.map((it: any, idx: number) => `<a href="${it.src}" data-pswp-width="${it.w}" data-pswp-height="${it.h}" target="_blank" rel="noreferrer" data-pswp-index="${idx}"></a>`).join('')
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '#pswp-gallery',
+    children: 'a',
+    pswpModule: () => import('photoswipe')
+  })
+  lightbox.init()
+  const first = gallery.querySelector('a')
+  if (first) (first as HTMLElement).click()
 }
 
 const filteredTickets = computed(() => {
