@@ -1219,6 +1219,118 @@
   ],
   "tickets": [
     {
+      "id": "782af526-05ec-45b8-a029-d7086933afc9",
+      "submittedById": "elo",
+      "submittedByName": "Elo",
+      "description": "首页 - 点击 审核  报错",
+      "site": "1JJ",
+      "taskId": "c1f6961d-b775-4024-b41d-60d8dbe85a3c",
+      "priority": "中",
+      "evidence": "https://rd-task-board.workspace-663903.chatgpt.site/api/ticket-media/36534f6c-16dc-4e2e-b936-c5e3205c308c",
+      "regressionId": "elo",
+      "attachments": [
+        {
+          "url": "https://rd-task-board.workspace-663903.chatgpt.site/api/ticket-media/36534f6c-16dc-4e2e-b936-c5e3205c308c",
+          "name": "剪贴板-2026-10-21T05-14-21-051Z.png",
+          "type": "image/png",
+          "source": {
+            "kind": "submission",
+            "operation": "提交问题",
+            "actorId": "elo",
+            "actorName": "Elo",
+            "at": 1792559662817,
+            "operationId": "40f548a4-c495-4e55-a354-a7d3e7ea3957"
+          }
+        }
+      ],
+      "reporterId": "elo",
+      "assigneeIds": [
+        "15e27cce-91d6-439a-96bc-5a8ddfd9ce9d"
+      ],
+      "status": "待处理",
+      "fixNote": "",
+      "returnReason": "",
+      "closeCategory": "",
+      "closeCategoryNote": "",
+      "title": "首页 - 点击 审核  报错",
+      "reporter": "Elo",
+      "assignee": "Adil",
+      "specialCloseReason": "",
+      "specialCloseDetail": "",
+      "specialCloseRelatedTicketId": "",
+      "closeRequestStatus": "",
+      "closeRequestReason": "",
+      "closeRequestDetail": "",
+      "closeRequestRelatedTicketId": "",
+      "closeRequestReviewDate": "",
+      "closeRequestedById": "",
+      "closeRequestedByName": "",
+      "deferred": false,
+      "deferredReason": "",
+      "deferredDetail": "",
+      "nextReviewDate": "",
+      "number": 112,
+      "revision": 1,
+      "createdAt": 1792559665809,
+      "updatedAt": 1792559665809
+    },
+    {
+      "id": "50d392b7-2183-43de-9e78-7ab78a2aab67",
+      "submittedById": "elo",
+      "submittedByName": "Elo",
+      "description": "主页面 点击提款  报错",
+      "site": "1JJ",
+      "taskId": "c1f6961d-b775-4024-b41d-60d8dbe85a3c",
+      "priority": "中",
+      "evidence": "https://rd-task-board.workspace-663903.chatgpt.site/api/ticket-media/f96d710c-c5b4-4680-8d0a-9885eda08d7e",
+      "regressionId": "elo",
+      "attachments": [
+        {
+          "url": "https://rd-task-board.workspace-663903.chatgpt.site/api/ticket-media/f96d710c-c5b4-4680-8d0a-9885eda08d7e",
+          "name": "剪贴板-2026-10-21T05-13-11-578Z.png",
+          "type": "image/png",
+          "source": {
+            "kind": "submission",
+            "operation": "提交问题",
+            "actorId": "elo",
+            "actorName": "Elo",
+            "at": 1792559593380,
+            "operationId": "c82f7ffc-9807-43d5-9945-3e332506c198"
+          }
+        }
+      ],
+      "reporterId": "elo",
+      "assigneeIds": [
+        "15e27cce-91d6-439a-96bc-5a8ddfd9ce9d"
+      ],
+      "status": "待处理",
+      "fixNote": "",
+      "returnReason": "",
+      "closeCategory": "",
+      "closeCategoryNote": "",
+      "title": "主页面 点击提款  报错",
+      "reporter": "Elo",
+      "assignee": "Adil",
+      "specialCloseReason": "",
+      "specialCloseDetail": "",
+      "specialCloseRelatedTicketId": "",
+      "closeRequestStatus": "",
+      "closeRequestReason": "",
+      "closeRequestDetail": "",
+      "closeRequestRelatedTicketId": "",
+      "closeRequestReviewDate": "",
+      "closeRequestedById": "",
+      "closeRequestedByName": "",
+      "deferred": false,
+      "deferredReason": "",
+      "deferredDetail": "",
+      "nextReviewDate": "",
+      "number": 111,
+      "revision": 1,
+      "createdAt": 1792559607593,
+      "updatedAt": 1792559607593
+    },
+    {
       "id": "662b824c-a111-4323-80bc-98de7ed5c707",
       "submittedById": "elo",
       "submittedByName": "Elo",
@@ -7133,6 +7245,26 @@
     }
   ],
   "logs": [
+    {
+      "id": 621,
+      "task_id": "c1f6961d-b775-4024-b41d-60d8dbe85a3c",
+      "ticket_id": "782af526-05ec-45b8-a029-d7086933afc9",
+      "actor_id": "elo",
+      "actor_name": "Elo",
+      "action": "提交问题",
+      "detail": "{\"before\":null,\"after\":{\"id\":\"782af526-05ec-45b8-a029-d7086933afc9\",\"submittedById\":\"elo\",\"submittedByName\":\"Elo\",\"description\":\"首页 - 点击 审核  报错\",\"site\":\"1JJ\",\"taskId\":\"c1f6961d-b775-4024-b41d-60d8dbe85a3c\",\"priority\":\"中\",\"evidence\":\"https://rd-task-board.workspace-663903.chatgpt.site/api/ticket-media/36534f6c-16dc-4e2e-b936-c5e3205c308c\",\"regressionId\":\"elo\",\"attachments\":[{\"url\":\"https://rd-task-board.workspace-663903.chatgpt.site/api/ticket-media/36534f6c-16dc-4e2e-b936-c5e3205c308c\",\"name\":\"剪贴板-2026-10-21T05-14-21-051Z.png\",\"type\":\"image/png\",\"source\":{\"kind\":\"submission\",\"operation\":\"提交问题\",\"actorId\":\"elo\",\"actorName\":\"Elo\",\"at\":1792559662817,\"operationId\":\"40f548a4-c495-4e55-a354-a7d3e7ea3957\"}}],\"reporterId\":\"elo\",\"assigneeIds\":[\"15e27cce-91d6-439a-96bc-5a8ddfd9ce9d\"],\"status\":\"待处理\",\"fixNote\":\"\",\"returnReason\":\"\",\"closeCategory\":\"\",\"closeCategoryNote\":\"\",\"title\":\"首页 - 点击 审核  报错\",\"reporter\":\"Elo\",\"assignee\":\"Adil\",\"specialCloseReason\":\"\",\"specialCloseDetail\":\"\",\"specialCloseRelatedTicketId\":\"\",\"closeRequestStatus\":\"\",\"closeRequestReason\":\"\",\"closeRequestDetail\":\"\",\"closeRequestRelatedTicketId\":\"\",\"closeRequestReviewDate\":\"\",\"closeRequestedById\":\"\",\"closeRequestedByName\":\"\",\"deferred\":false,\"deferredReason\":\"\",\"deferredDetail\":\"\",\"nextReviewDate\":\"\"},\"operationId\":\"40f548a4-c495-4e55-a354-a7d3e7ea3957\",\"attachmentSource\":{\"kind\":\"submission\",\"operation\":\"提交问题\"}}",
+      "created_at": 1792559665809
+    },
+    {
+      "id": 620,
+      "task_id": "c1f6961d-b775-4024-b41d-60d8dbe85a3c",
+      "ticket_id": "50d392b7-2183-43de-9e78-7ab78a2aab67",
+      "actor_id": "elo",
+      "actor_name": "Elo",
+      "action": "提交问题",
+      "detail": "{\"before\":null,\"after\":{\"id\":\"50d392b7-2183-43de-9e78-7ab78a2aab67\",\"submittedById\":\"elo\",\"submittedByName\":\"Elo\",\"description\":\"主页面 点击提款  报错\",\"site\":\"1JJ\",\"taskId\":\"c1f6961d-b775-4024-b41d-60d8dbe85a3c\",\"priority\":\"中\",\"evidence\":\"https://rd-task-board.workspace-663903.chatgpt.site/api/ticket-media/f96d710c-c5b4-4680-8d0a-9885eda08d7e\",\"regressionId\":\"elo\",\"attachments\":[{\"url\":\"https://rd-task-board.workspace-663903.chatgpt.site/api/ticket-media/f96d710c-c5b4-4680-8d0a-9885eda08d7e\",\"name\":\"剪贴板-2026-10-21T05-13-11-578Z.png\",\"type\":\"image/png\",\"source\":{\"kind\":\"submission\",\"operation\":\"提交问题\",\"actorId\":\"elo\",\"actorName\":\"Elo\",\"at\":1792559593380,\"operationId\":\"c82f7ffc-9807-43d5-9945-3e332506c198\"}}],\"reporterId\":\"elo\",\"assigneeIds\":[\"15e27cce-91d6-439a-96bc-5a8ddfd9ce9d\"],\"status\":\"待处理\",\"fixNote\":\"\",\"returnReason\":\"\",\"closeCategory\":\"\",\"closeCategoryNote\":\"\",\"title\":\"主页面 点击提款  报错\",\"reporter\":\"Elo\",\"assignee\":\"Adil\",\"specialCloseReason\":\"\",\"specialCloseDetail\":\"\",\"specialCloseRelatedTicketId\":\"\",\"closeRequestStatus\":\"\",\"closeRequestReason\":\"\",\"closeRequestDetail\":\"\",\"closeRequestRelatedTicketId\":\"\",\"closeRequestReviewDate\":\"\",\"closeRequestedById\":\"\",\"closeRequestedByName\":\"\",\"deferred\":false,\"deferredReason\":\"\",\"deferredDetail\":\"\",\"nextReviewDate\":\"\"},\"operationId\":\"c82f7ffc-9807-43d5-9945-3e332506c198\",\"attachmentSource\":{\"kind\":\"submission\",\"operation\":\"提交问题\"}}",
+      "created_at": 1792559607593
+    },
     {
       "id": 619,
       "task_id": "c1f6961d-b775-4024-b41d-60d8dbe85a3c",

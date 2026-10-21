@@ -44,8 +44,8 @@
           <tr v-for="tk in filteredTickets" :key="tk.id" class="border-t hover:bg-gray-50">
             <td class="p-2">{{ tk.number }}</td>
             <td class="p-2 max-w-[320px]">
-              <a v-if="hasAttachments(tk)" :href="(tk.attachments as any)[0].url" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline text-left truncate max-w-[320px] inline-block" :title="tk.title">{{ tk.title }}</a>
-              <span v-else class="truncate max-w-[320px] inline-block" :title="tk.title">{{ tk.title }}</span>
+              <a v-if="hasAttachments(tk)" :href="(tk.attachments as any)[0].url" target="_blank" rel="noopener noreferrer" class="text-gray-900 hover:text-blue-600 hover:underline text-left truncate max-w-[320px] inline-block" :title="tk.title">{{ tk.title }}</a>
+              <span v-else class="truncate max-w-[320px] inline-block text-gray-900" :title="tk.title">{{ tk.title }}</span>
             </td>
             <td class="p-2"><span :class="ticketStatusClass(tk.status)">{{ tk.status }}</span></td>
             <td class="p-2">{{ tk.priority }}</td>
