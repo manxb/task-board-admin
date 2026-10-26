@@ -63,7 +63,7 @@
       </table>
     </div>
 
-    <div class="bg-white rounded-lg border p-4">
+    <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm">
       <h2 class="text-lg font-medium mb-3">各任务环节堆叠（完成度拆解）</h2>
       <div class="w-full h-[380px]">
         <v-chart :option="stackedOption" autoresize class="w-full h-full" />

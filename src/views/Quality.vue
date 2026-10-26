@@ -44,7 +44,7 @@
       </table>
     </div>
 
-    <div class="bg-white rounded-lg border p-4">
+    <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm">
       <h2 class="text-lg font-medium mb-3">待回归按处理人分布</h2>
       <div class="w-full h-[320px]">
         <v-chart v-if="hasRegData" :option="regByAssignee" autoresize class="w-full h-full" />

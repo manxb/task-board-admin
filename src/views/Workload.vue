@@ -1,13 +1,13 @@
 <template>
   <div class="space-y-6">
-    <div class="bg-white rounded-lg border p-4">
+    <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm">
       <h2 class="text-lg font-medium mb-3">按处理人统计工单（总数）</h2>
       <div class="w-full h-[340px]">
         <v-chart v-if="hasTicketData" :option="ticketsByAssignee" autoresize class="w-full h-full" />
         <div v-else class="text-sm text-gray-500 py-12 text-center">暂无数据</div>
       </div>
     </div>
-    <div class="bg-white rounded-lg border p-4">
+    <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm">
       <h2 class="text-lg font-medium mb-3">按角色环节分配（负责人）</h2>
       <div class="w-full h-[340px]">
         <v-chart v-if="hasRoleData" :option="roleOwner" autoresize class="w-full h-full" />

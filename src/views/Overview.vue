@@ -1,46 +1,46 @@
 <template>
   <div class="space-y-6">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="bg-white rounded-lg border p-4">
+      <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm hover:shadow-md transition-shadow">
         <div class="text-sm text-gray-500">任务总数</div>
         <div class="text-2xl font-semibold">{{ tasksCount }}</div>
       </div>
-      <div class="bg-white rounded-lg border p-4">
+      <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm hover:shadow-md transition-shadow">
         <div class="text-sm text-gray-500">进行中（开发中/设计中）</div>
         <div class="text-2xl font-semibold">{{ inProgress }}</div>
       </div>
-      <div class="bg-white rounded-lg border p-4">
+      <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm hover:shadow-md transition-shadow">
         <div class="text-sm text-gray-500">测试中</div>
         <div class="text-2xl font-semibold">{{ testing }}</div>
       </div>
-      <div class="bg-white rounded-lg border p-4">
+      <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm hover:shadow-md transition-shadow">
         <div class="text-sm text-gray-500">已上线</div>
         <div class="text-2xl font-semibold">{{ launched }}</div>
       </div>
-      <div class="bg-white rounded-lg border p-4">
+      <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm hover:shadow-md transition-shadow">
         <div class="text-sm text-gray-500">待回归+待处理（工单）</div>
         <div class="text-2xl font-semibold">{{ openCount }}</div>
       </div>
-      <div class="bg-white rounded-lg border p-4">
+      <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm hover:shadow-md transition-shadow">
         <div class="text-sm text-gray-500">已关闭（工单）</div>
         <div class="text-2xl font-semibold">{{ closedCount }}</div>
       </div>
-      <div class="bg-white rounded-lg border p-4">
+      <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm hover:shadow-md transition-shadow">
         <div class="text-sm text-gray-500">工单总数</div>
         <div class="text-2xl font-semibold">{{ ticketsCount }}</div>
       </div>
-      <div class="bg-white rounded-lg border p-4">
+      <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm hover:shadow-md transition-shadow">
         <div class="text-sm text-gray-500">1JJ/JJB</div>
         <div class="text-lg font-medium">{{ siteStats }}</div>
       </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      <div class="bg-white rounded-lg border p-4">
+      <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm hover:shadow-md transition-shadow">
         <h2 class="text-lg font-medium mb-3">任务状态分布</h2>
         <v-chart :option="statusPie" :autoresize="false" class="w-full h-[260px]" />
       </div>
-      <div class="bg-white rounded-lg border p-4">
+      <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm hover:shadow-md transition-shadow">
         <h2 class="text-lg font-medium mb-3">按站点/类型统计</h2>
         <div class="w-full h-[260px] overflow-hidden">
           <v-chart :option="siteTypeBar" :autoresize="false" class="w-full h-full" />
@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <div class="bg-white rounded-lg border p-4">
+    <div class="bg-white rounded-2xl border border-slate-200/60 p-4 shadow-sm hover:shadow-md transition-shadow">
       <h2 class="text-lg font-medium mb-3">环节进度概览（已完成占比）</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         <div v-for="t in tasksWithMeta" :key="t.id" class="border rounded p-3">

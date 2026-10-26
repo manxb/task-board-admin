@@ -1,27 +1,38 @@
 <template>
-  <div class="min-h-screen flex bg-gray-50">
-    <aside class="w-60 bg-white border-r flex flex-col">
-      <div class="p-4 border-b">
-        <h1 class="text-lg font-semibold">任务看板</h1>
-        <div class="text-xs text-gray-500">Task Board Admin</div>
+  <div class="min-h-screen flex" style="background: linear-gradient(135deg,#f4f6fb 0%,#eef2ff 100%)">
+    <aside class="w-64 flex flex-col" style="background: linear-gradient(180deg,#1e293b 0%,#0f172a 100%)">
+      <div class="p-5 border-b border-white/10">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg,#3b82f6,#8b5cf6)">
+            <span class="text-white font-bold text-sm">TB</span>
+          </div>
+          <div>
+            <h1 class="text-base font-semibold text-white">任务看板</h1>
+            <div class="text-xs text-slate-400">Task Board Admin</div>
+          </div>
+        </div>
       </div>
       <nav class="flex-1 p-3 space-y-1">
         <router-link v-for="r in routes" :key="r.path" :to="r.path"
-          class="block px-3 py-2 rounded text-sm hover:bg-gray-100"
-          :class="{ 'bg-gray-100 font-medium': $route.path.startsWith(r.path) }">
+          class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all"
+          :class="$route.path.startsWith(r.path) ? 'bg-white/10 text-white font-medium shadow-sm' : 'text-slate-300 hover:bg-white/5 hover:text-white'">
+          <span class="w-1.5 h-1.5 rounded-full" :class="$route.path.startsWith(r.path) ? 'bg-blue-400' : 'bg-slate-500'"></span>
           {{ r.name }}
         </router-link>
       </nav>
-      <div class="p-3 border-t text-xs text-gray-500">
+      <div class="p-4 border-t border-white/10 text-xs text-slate-400">
         基于 data/task.json
       </div>
     </aside>
-    <main class="flex-1 flex flex-col">
-      <header class="bg-white border-b p-3 flex items-center justify-between">
-        <div class="text-sm font-medium">{{ currentName }} <span v-if="pendingCount>0" class="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-red-100 text-red-700">待处理 {{ pendingCount }}</span></div>
-        <div class="text-xs text-gray-500">{{ now }}</div>
+    <main class="flex-1 flex flex-col min-w-0">
+      <header class="px-6 py-3 flex items-center justify-between border-b border-slate-200/60 backdrop-blur" style="background: rgba(255,255,255,0.7)">
+        <div class="text-sm font-semibold text-slate-800 flex items-center gap-2">
+          {{ currentName }}
+          <span v-if="pendingCount>0" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-600">待处理 {{ pendingCount }}</span>
+        </div>
+        <div class="text-xs text-slate-500">{{ now }}</div>
       </header>
-      <div class="p-4 flex-1 overflow-auto">
+      <div class="p-6 flex-1 overflow-auto">
         <router-view />
       </div>
     </main>
